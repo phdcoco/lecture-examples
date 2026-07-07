@@ -6,6 +6,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "order_items")
 @Getter
@@ -19,19 +21,43 @@ public class OrderItem {
     @JoinColumn(name = "order_id")
     private Order order;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
-    private Product product;
+    // name 가져온다.
+    @Column(nullable = false)
+    private String name;
+
+    // price 가져온다.
+    // 역시 money와 연관되어 있으므로 VO를 이용한다.
+    @Embedded
+    @AttributeOverride(
+            name = "value",
+            column = @Column(name = "price", nullable = false)
+    )
+    private Money price;
+
+    // productId로 접근
+    @Column(nullable = false)
+    private Long productId;
 
     @Column(nullable = false)
     private Integer quantity;
 
-    public static OrderItem create(Product product, int quantity) {
+    public static OrderItem create(String name, BigDecimal price, Long productId, int quantity) {
         OrderItem orderItem = new OrderItem();
-        orderItem.product = product;
+        orderItem.name = name;
+        orderItem.price = Money.from(price); // from 메서드 활용
+        orderItem.productId = productId;
         orderItem.quantity = quantity;
 
         return orderItem;
+    }
+
+    // from을 이용한다.
+    public void changePrice(BigDecimal newPrice) {
+        this.price = Money.from(newPrice);
+    }
+
+    public void changeQuantity(int newQuantity) {
+        this.quantity = newQuantity;
     }
 
     void assignOrder(Order order) {
