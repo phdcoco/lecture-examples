@@ -3,6 +3,7 @@ package com.growmighty.lectures.firstday.tangledmonolith.settlement.presentation
 import com.growmighty.lectures.firstday.tangledmonolith.common.response.ApiResponse;
 import com.growmighty.lectures.firstday.tangledmonolith.order.domain.OrderRepository;
 import com.growmighty.lectures.firstday.tangledmonolith.settlement.application.NaiveSettlementService;
+import com.growmighty.lectures.firstday.tangledmonolith.settlement.application.SettlementBatchService;
 import com.growmighty.lectures.firstday.tangledmonolith.settlement.application.dto.SettleReport;
 import com.growmighty.lectures.firstday.tangledmonolith.settlement.domain.SettlementRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ public class SettlementController {
     private static final long MB = 1024 * 1024;
 
     private final NaiveSettlementService naiveSettlementService;
+    private final SettlementBatchService settlementBatchService;
     private final SettlementRepository settlementRepository;
     private final OrderRepository orderRepository;
 
@@ -32,6 +34,11 @@ public class SettlementController {
             ? naiveSettlementService.settleAll()
             : naiveSettlementService.settleUpTo(limit);
         return ApiResponse.ok(report);
+    }
+
+    @PostMapping("/batch")
+    public ApiResponse<SettleReport> settleBatch() {
+        return ApiResponse.ok(settlementBatchService.run());
     }
 
     @GetMapping("/status")
