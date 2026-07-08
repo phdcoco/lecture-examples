@@ -36,9 +36,21 @@ public class SettlementController {
         return ApiResponse.ok(report);
     }
 
+    // failAt까지 정상 실행 후 강제 에러
     @PostMapping("/batch")
-    public ApiResponse<SettleReport> settleBatch() {
-        return ApiResponse.ok(settlementBatchService.run());
+    public ApiResponse<SettleReport> settleBatch(@RequestParam(required = false) Double failAt) {
+        SettleReport report = (failAt ==null)
+            ? settlementBatchService.run()
+            : settlementBatchService.runFailing(failAt);
+
+        return ApiResponse.ok(report);
+    }
+
+    // 재시작 시 실패한 인스턴스부터 이어서 재개한다.
+    @PostMapping("/batch/restart")
+    public ApiResponse<SettleReport> restartBatch(@RequestParam(defaultValue = "1") long runId,
+                                                  @RequestParam(required = false) Double failAt) {
+        return ApiResponse.ok(settlementBatchService.runRestartable(runId, failAt));
     }
 
     @GetMapping("/status")

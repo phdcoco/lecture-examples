@@ -1,5 +1,6 @@
 package com.growmighty.lectures.firstday.tangledmonolith.settlement.batch;
 
+import com.growmighty.lectures.firstday.tangledmonolith.order.domain.Order;
 import com.growmighty.lectures.firstday.tangledmonolith.order.domain.OrderStatus;
 import com.growmighty.lectures.firstday.tangledmonolith.settlement.domain.Settlement;
 import jakarta.persistence.EntityManagerFactory;
@@ -11,7 +12,6 @@ import org.springframework.batch.core.step.Step;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.infrastructure.item.database.JpaItemWriter;
 import org.springframework.batch.infrastructure.item.database.JpaPagingItemReader;
-import org.springframework.batch.infrastructure.item.database.Order;
 import org.springframework.batch.infrastructure.item.database.builder.JpaItemWriterBuilder;
 import org.springframework.batch.infrastructure.item.database.builder.JpaPagingItemReaderBuilder;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,6 +20,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import java.util.Map;
+
 
 @Configuration
 public class SettlementJobConfig {
@@ -73,6 +74,5 @@ public class SettlementJobConfig {
         return new JobBuilder(JOB_NAME, jobRepository)
             .start(settlementStep)
             .build();
-    }
     }
 }
