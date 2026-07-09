@@ -53,6 +53,26 @@ public class SettlementController {
         return ApiResponse.ok(settlementBatchService.runRestartable(runId, failAt));
     }
 
+    // 단순히 스레드만 늘리는 순진한 가속
+    // threads : 동시 스레드 수
+    @PostMapping("/batch/multi-threaded")
+    public ApiResponse<SettleReport> settleMultiThreaded(@RequestParam(required = false) Integer threads) {
+        return ApiResponse.ok(settlementBatchService.runMultiThreaded(threads));
+    }
+
+    // 멀티스레드에서 재시작 경우 재현해보기. 같은 runId로 다시 호출해본다. 과연 멱등성이 성립될까?
+    @PostMapping("/batch/multi-threaded/restart")
+    public ApiResponse<SettleReport> restartMultiThreaded(@RequestParam(defaultValue = "1") long runId,
+                                                          @RequestParam(required = false) Double failAt) {
+        return ApiResponse.ok(settlementBatchService.runMultiThreadedRestartable(runId, failAt));
+    }
+
+    // 이번에는 gridSize개로 나눠 워커마다 전용 Reader로 병렬 처리.
+    @PostMapping("/batch/partitioned")
+    public ApiResponse<SettleReport> settlePartitioned(@RequestParam(required = false) Integer gridSize) {
+        return ApiResponse.ok(settlementBatchService.runPartitioned(gridSize));
+    }
+
     @GetMapping("/status")
     public ApiResponse<Map<String, Object>> status() {
         Runtime rt = Runtime.getRuntime();
