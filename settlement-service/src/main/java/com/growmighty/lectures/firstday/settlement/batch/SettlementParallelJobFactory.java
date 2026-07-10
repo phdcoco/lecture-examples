@@ -1,8 +1,9 @@
 package com.growmighty.lectures.firstday.settlement.batch;
 
-import com.growmighty.lectures.firstday.order.domain.Order;
-import com.growmighty.lectures.firstday.order.domain.OrderStatus;
+
 import com.growmighty.lectures.firstday.settlement.domain.Settlement;
+import com.growmighty.lectures.firstday.settlement.read.Order;
+import com.growmighty.lectures.firstday.settlement.read.OrderStatus;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.job.Job;

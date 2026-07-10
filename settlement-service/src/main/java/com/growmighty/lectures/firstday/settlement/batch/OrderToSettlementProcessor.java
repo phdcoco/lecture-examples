@@ -2,10 +2,10 @@ package com.growmighty.lectures.firstday.settlement.batch;
 
 // 읽어온 주문 1건을 정산 1건으로 가공한다.
 
-import com.growmighty.lectures.firstday.order.domain.Order;
-import com.growmighty.lectures.firstday.order.domain.OrderStatus;
 import com.growmighty.lectures.firstday.settlement.domain.Settlement;
 import com.growmighty.lectures.firstday.settlement.domain.SettlementRepository;
+import com.growmighty.lectures.firstday.settlement.read.Order;
+import com.growmighty.lectures.firstday.settlement.read.OrderStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.infrastructure.item.ItemProcessor;

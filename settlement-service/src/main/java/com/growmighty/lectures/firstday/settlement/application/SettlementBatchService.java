@@ -1,10 +1,11 @@
 package com.growmighty.lectures.firstday.settlement.application;
 
-import com.growmighty.lectures.firstday.order.domain.OrderRepository;
+
 import com.growmighty.lectures.firstday.settlement.application.dto.SettleReport;
 import com.growmighty.lectures.firstday.settlement.batch.SettlementFaultBox;
 import com.growmighty.lectures.firstday.settlement.batch.SettlementParallelJobFactory;
 import com.growmighty.lectures.firstday.settlement.domain.SettlementRepository;
+import com.growmighty.lectures.firstday.settlement.read.OrderRepository;
 import com.growmighty.lectures.firstday.settlement.support.HeapMonitor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

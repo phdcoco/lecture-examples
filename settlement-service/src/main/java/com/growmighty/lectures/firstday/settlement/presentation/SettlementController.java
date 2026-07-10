@@ -1,11 +1,12 @@
 package com.growmighty.lectures.firstday.settlement.presentation;
 
 import com.growmighty.lectures.firstday.common.response.ApiResponse;
-import com.growmighty.lectures.firstday.order.domain.OrderRepository;
+
 import com.growmighty.lectures.firstday.settlement.application.NaiveSettlementService;
 import com.growmighty.lectures.firstday.settlement.application.SettlementBatchService;
 import com.growmighty.lectures.firstday.settlement.application.dto.SettleReport;
 import com.growmighty.lectures.firstday.settlement.domain.SettlementRepository;
+import com.growmighty.lectures.firstday.settlement.read.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
