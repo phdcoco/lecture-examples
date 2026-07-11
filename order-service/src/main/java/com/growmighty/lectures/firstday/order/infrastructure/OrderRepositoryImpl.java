@@ -1,7 +1,7 @@
 package com.growmighty.lectures.firstday.order.infrastructure;
 
 // infrastructure에서 domain으로 참조 (DIP)
-// OrderJpaRepository를 DI하는 중.
+// OrderRepository를 DI하는 중.
 import com.growmighty.lectures.firstday.order.domain.Order;
 import com.growmighty.lectures.firstday.order.domain.OrderRepository;
 import lombok.RequiredArgsConstructor;

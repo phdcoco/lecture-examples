@@ -13,3 +13,6 @@ include 'order-service'     // :8080
 
 // Eureka 등록. 전화번호부이다.
 include 'discovery-server' // :8761
+
+// Gateway 등록. 114다.
+include 'gateway-server' // :8000, 바깥에 공개할 유일한 문이다.
