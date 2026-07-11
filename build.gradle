@@ -30,6 +30,9 @@ subprojects {
     dependencyManagement {
         imports {
             mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+
+            // Spring CLoud 릴리즈 트레인. 스타터들을 버전 명시 없이 쓸 수 있다.
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:2025.1.2"
         }
     }
 
