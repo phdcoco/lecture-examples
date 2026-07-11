@@ -1,0 +1,7 @@
+# 로컬에는 금고 열쇠만 남긴다 — 나머지 설정은 config-server 가 전부 배달한다.
+spring:
+  application:
+    name: payment-service # 이것이 바로 금고 열쇠
+  config:
+    # config-server 에서 설정 값들을 가져온다. 이제 설정 파일이 매우 간단해졌다!
+    import: optional:configserver:http://localhost:8888
