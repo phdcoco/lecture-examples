@@ -20,7 +20,7 @@ public class ProductDataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) {
         // sellerId는 이제 다른 서비스의 식별자다. 임의 값을 사용해도 된다.
-        productService.register(new RegisterProductCommand(1L, "청축 키보드", BigDecimal.valueOf(120_000), 10, "설명: 청축 키보드"));
-        productService.register(new RegisterProductCommand(1L, "무선 마우스", BigDecimal.valueOf(45_000), 20, "설명: 무선 마우스"));
+        productService.register(new RegisterProductCommand(1L, "청축 키보드", BigDecimal.valueOf(120_000), 100, "설명: 청축 키보드"));
+        productService.register(new RegisterProductCommand(1L, "무선 마우스", BigDecimal.valueOf(45_000), 200, "설명: 무선 마우스"));
     }
 }
