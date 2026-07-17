@@ -1,0 +1,24 @@
+plugins {
+    id 'org.springframework.boot'   // 실행 가능한 서비스이므로 Boot 플러그인 적용 (버전은 루트에 등록됨)
+}
+
+dependencies {
+    implementation project(':common')
+
+    // 명부에 등록하고, 명부 사본을 받아오는 능력 (Spring Cloud LoadBalancer 포함)
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+
+    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-h2console'
+    runtimeOnly 'com.h2database:h2'
+
+    // 부팅 시 config-server에 들러 설정을 받아오는 능력
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+
+    // /actuator/refresh -> 재시작 없이 설정 다시 읽기가 가능해진다.
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+}
