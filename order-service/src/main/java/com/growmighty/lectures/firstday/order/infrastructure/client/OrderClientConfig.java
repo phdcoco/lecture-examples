@@ -1,4 +1,8 @@
-package com.growmighty.lectures.firstday.order.infrastructure.client;
+
+// Feign이 다 해 준다. 이제 이 파일은 필요 없다.
+
+
+/*package com.growmighty.lectures.firstday.order.infrastructure.client;
 
 
 import org.springframework.beans.factory.annotation.Value;
@@ -7,7 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.web.client.RestClient;
-
+*/
 /*
     결과적으로 등록되는 Beam은
     - RestClient.Builder
@@ -15,6 +19,7 @@ import org.springframework.web.client.RestClient;
     - RestClient (product)
     - RestClient (payment)
  */
+/*
 @Configuration // Bean을 생성하는 클래스가 있어요!
 public class OrderClientConfig {
     @Bean
@@ -48,4 +53,7 @@ public class OrderClientConfig {
             @Value("${order.client.product-base-url:http://product-service}") String baseUrl) {
         return builder.clone().baseUrl(baseUrl).build();
     }
+
+
 }
+*/

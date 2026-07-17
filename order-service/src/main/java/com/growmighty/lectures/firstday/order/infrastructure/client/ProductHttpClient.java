@@ -1,3 +1,8 @@
+
+/*
+
+이제 이 파일은 필요 없다.
+
 package com.growmighty.lectures.firstday.order.infrastructure.client;
 
 import com.growmighty.lectures.firstday.order.application.port.ProductPort;
@@ -14,20 +19,16 @@ import org.springframework.web.client.RestClient;
 @Component
 @RequiredArgsConstructor
 public class ProductHttpClient implements ProductPort {
-    // productRestClient를 주입받도록 필드명 변경.
-    // 필드명이 빈 이름과 일치하면 스프링이 이름에 맞는 빈을 알아서 주입해 준다.
-    private final RestClient productRestClient;
+
+    // RestClient 대신 Feign 프록시를 주입받는다.
+    private final ProductFeignClient productFeignClient;
 
 
     @Override
     public ProductSnapshot getProduct(Long productId) {
-        ApiResponseBody<ProductApiData> body = productRestClient.get()
-                .uri("/products/{productId}", productId)
-                .retrieve()
-                .body(new ParameterizedTypeReference<>() {
-                });
 
-        ProductApiData data = body.data();
+        // Feign이 HTTP 관련된 것 알아서 다 해줌. 대신 그걸 번역하는 건 우리가 해야 함.
+        ProductApiData data = productFeignClient.getProduct(productId).data();
         return new ProductSnapshot(
                 data.id(),
                 data.name(),
@@ -37,24 +38,16 @@ public class ProductHttpClient implements ProductPort {
         );
     }
 
+    // 나머지 두 개도 다 Feign에게 위임하자.
     @Override
     public void decreaseStock(Long productId, int quantity) {
-        productRestClient.post()
-                .uri("/products/{productId}/decrease-stock", productId)
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(new StockChangeBody(quantity))
-                .retrieve()
-                .toBodilessEntity();
+        productFeignClient.decreaseStock(productId, new StockChangeBody(quantity));
     }
 
     @Override
     public void restoreStock(Long productId, int quantity) {
-        productRestClient.post()
-                .uri("/products/{productId}/restore-stock", productId)
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(new StockChangeBody(quantity))
-                .retrieve()
-                .toBodilessEntity();
+        productFeignClient.restoreStock(productId, new StockChangeBody(quantity));
     }
 
 }
+ */
