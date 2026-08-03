@@ -5,3 +5,7 @@ spring:
   config:
     # config-server 에서 설정 값들을 가져온다. 이제 설정 파일이 매우 간단해졌다!
     import: optional:configserver:http://localhost:8888
+  elasticsearch:
+    uris: http://localhost:9200
+    connection-timeout: 3s
+    socket-timeout: 5s
