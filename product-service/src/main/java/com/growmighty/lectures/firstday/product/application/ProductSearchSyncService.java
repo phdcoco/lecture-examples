@@ -1,8 +1,8 @@
 package com.growmighty.lectures.firstday.product.application;
 
+import com.growmighty.lectures.firstday.product.application.port.ProductIndexPort;
+import com.growmighty.lectures.firstday.product.domain.Product;
 import com.growmighty.lectures.firstday.product.domain.ProductRepository;
-import com.growmighty.lectures.firstday.product.infrastructure.search.ProductDocument;
-import com.growmighty.lectures.firstday.product.infrastructure.search.ProductSearchRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,15 +16,13 @@ import java.util.List;
 public class ProductSearchSyncService {
 
     private final ProductRepository productRepository;
-    private final ProductSearchRepository searchRepository;
+    private final ProductIndexPort indexPort;
 
     @Transactional(readOnly = true)
     public long reindexAll() {
-        List<ProductDocument> docs = productRepository.findAll().stream()
-            .map(ProductDocument::from)
-            .toList();
-        searchRepository.saveAll(docs);
-        log.info("전체 재색인 완료: {}건", docs.size());
-        return docs.size();
+        List<Product> products = productRepository.findAll();
+        indexPort.indexAll(products);
+        log.info("전체 재색인 완료: {}건", products.size());
+        return products.size();
     }
 }
